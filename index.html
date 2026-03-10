@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE YARN TALES - ISHIKA SINGH</title>
+    <style>
+        /* ========== BASE RESET ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ========== CROCHET FONT IMPORT ========== */
+        @import url('https://fonts.googleapis.com/css2?family=Grandstander:wght@400;600;700&family=Patrick+Hand&display=swap');
+
+        /* ========== ROOT VARIABLES - YARN COLORS ========== */
+        :root {
+            --yarn-pink: #FF6B9D;
+            --yarn-peach: #FFAB91;
+            --yarn-mint: #88D8B0;
+            --yarn-lavender: #B39DDB;
+            --yarn-cream: #FFF8E7;
+            --yarn-brown: #8D6E63;
+            --yarn-coral: #FF7675;
+            --yarn-sky: #74B9FF;
+            --stitch-shadow: rgba(0,0,0,0.1);
+        }
+
+        /* ========== BODY - CROCHET BACKGROUND ========== */
+        body {
+            font-family: 'Patrick Hand', cursive;
+            background-color: var(--yarn-cream);
+            background-image: 
+                /* Crochet stitch pattern */
+                radial-gradient(ellipse 8px 6px at 8px 6px, transparent 5px, var(--yarn-peach) 5px, var(--yarn-peach) 6px, transparent 6px),
+                radial-gradient(ellipse 8px 6px at 0px 6px, transparent 5px, var(--yarn-peach) 5px, var(--yarn-peach) 6px, transparent 6px);
+            background-size: 16px 12px;
+            background-position: 0 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ========== CROCHET STITCH OVERLAY ========== */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(255,255,255,0.03) 10px,
+                    rgba(255,255,255,0.03) 11px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(255,255,255,0.03) 10px,
+                    rgba(255,255,255,0.03) 11px
+                );
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ========== YARN BALL DECORATIONS ========== */
+        .yarn-decoration {
+            position: fixed;
+            font-size: 3em;
+            opacity: 0.15;
+            z-index: 0;
+            pointer-events: none;
+            animation: floatYarn 15s ease-in-out infinite;
+        }
+
+        .yarn-decoration:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .yarn-decoration:nth-child(2) { top: 30%; right: 8%; animation-delay: 3s; }
+        .yarn-decoration:nth-child(3) { top: 60%; left: 3%; animation-delay: 6s; }
+        .yarn-decoration:nth-child(4) { top: 80%; right: 5%; animation-delay: 9s; }
+        .yarn-decoration:nth-child(5) { top: 45%; left: 92%; animation-delay: 12s; }
+
+        @keyframes floatYarn {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(10deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(20px) rotate(-10deg); }
+        }
+
+        /* ========== CROCHET BORDER STYLE ========== */
+        .crochet-border {
+            border: 4px solid transparent;
+            border-image: repeating-linear-gradient(
+                90deg,
+                var(--yarn-pink) 0px,
+                var(--yarn-pink) 10px,
+                var(--yarn-mint) 10px,
+                var(--yarn-mint) 20px,
+                var(--yarn-lavender) 20px,
+                var(--yarn-lavender) 30px
+            ) 4;
+        }
+
+        /* ========== YARN STITCH BORDER ========== */
+        .stitch-border {
+            position: relative;
+            border: none;
+        }
+
+        .stitch-border::before {
+            content: '∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿';
+            position: absolute;
+            top: -15px;
+            left: 0;
+            width: 100%;
+            font-size: 1.5em;
+            color: var(--yarn-pink);
+            overflow: hidden;
+            white-space: nowrap;
+            animation: stitchMove 10s linear infinite;
+        }
+
+        .stitch-border::after {
+            content: '∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            font-size: 1.5em;
+            color: var(--yarn-mint);
+            overflow: hidden;
+            white-space: nowrap;
+            animation: stitchMove 10s linear infinite reverse;
+        }
+
+        @keyframes stitchMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50px); }
+        }
+        /* ========== HEADER STYLES ========== */
+        header {
+            position: relative;
+            z-index: 10;
+            background: linear-gradient(135deg, var(--yarn-cream) 0%, #fff 50%, var(--yarn-cream) 100%);
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px var(--stitch-shadow);
+            border-bottom: 8px solid transparent;
+            border-image: repeating-linear-gradient(
+                90deg,
+                var(--yarn-pink),
+                var(--yarn-pink) 15px,
+                transparent 15px,
+                transparent 20px,
+                var(--yarn-mint) 20px,
+                var(--yarn-mint) 35px,
+                transparent 35px,
+                transparent 40px
+            ) 8;
+        }
+
+        /* Crochet Hook Decoration */
+        header::before {
+            content: '🪝';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 2em;
+            animation: hookSwing 2s ease-in-out infinite;
+        }
+
+        header::after {
+            content: '🪡';
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2em;
+            animation: hookSwing 2s ease-in-out infinite reverse;
+        }
+
+        @keyframes hookSwing {
+            0%, 100% { transform: rotate(-15deg); }
+            50% { transform: rotate(15deg); }
+        }
+
+        /* ========== LOGO STYLES ========== */
+        .logo {
+            font-family: 'Grandstander', cursive;
+            font-size: 3em;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--yarn-pink), var(--yarn-coral), var(--yarn-lavender));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 3px 3px 6px var(--stitch-shadow);
+            animation: yarnWobble 3s ease-in-out infinite;
+            letter-spacing: 4px;
+        }
+
+        @keyframes yarnWobble {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.02) rotate(-1deg); }
+            75% { transform: scale(1.02) rotate(1deg); }
+        }
+
+        .tagline {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.4em;
+            color: var(--yarn-brown);
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .owner-name {
+            font-family: 'Grandstander', cursive;
+            font-size: 1.8em;
+            font-weight: 600;
+            color: var(--yarn-lavender);
+            margin-top: 15px;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+        }
+
+        .owner-name::before {
+            content: '✿';
+            margin-right: 15px;
+            color: var(--yarn-pink);
+            animation: spinFlower 4s linear infinite;
+        }
+
+        .owner-name::after {
+            content: '✿';
+            margin-left: 15px;
+            color: var(--yarn-mint);
+            animation: spinFlower 4s linear infinite reverse;
+        }
+
+        @keyframes spinFlower {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ========== NAVIGATION ========== */
+        nav {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 4px 20px var(--stitch-shadow);
+        }
+
+        /* Yarn thread line above nav */
+        nav::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 4px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--yarn-pink) 0px,
+                var(--yarn-pink) 20px,
+                var(--yarn-mint) 20px,
+                var(--yarn-mint) 40px,
+                var(--yarn-lavender) 40px,
+                var(--yarn-lavender) 60px
+            );
+            border-radius: 2px;
+        }
+
+        .nav-btn {
+            font-family: 'Grandstander', cursive;
+            background: linear-gradient(145deg, #fff, var(--yarn-cream));
+            color: var(--yarn-brown);
+            border: 3px solid var(--yarn-pink);
+            padding: 12px 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 
+                0 4px 15px var(--stitch-shadow),
+                inset 0 -2px 5px var(--stitch-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+            transform: translateY(-50%) skewX(-20deg);
+            transition: left 0.6s ease;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(145deg, var(--yarn-pink), var(--yarn-coral));
+            color: white;
+            border-color: var(--yarn-coral);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 107, 157, 0.4);
+        }
+
+        .nav-btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(145deg, var(--yarn-mint), var(--yarn-sky));
+            color: white;
+            border-color: var(--yarn-mint);
+        }
+        /* ========== MAIN CONTAINER ========== */
+        .container {
+            position: relative;
+            z-index: 5;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        /* ========== SECTION STYLES ========== */
+        .product-section {
+            display: none;
+            animation: sectionFadeIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .product-section.active {
+            display: block;
+        }
+
+        @keyframes sectionFadeIn {
+            0% { 
+                opacity: 0; 
+                transform: translateY(50px) scale(0.9);
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* ========== PRODUCT GRID ========== */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        /* ========== PRODUCT CARD - CROCHET STYLE ========== */
+        .product-card {
+            background: linear-gradient(145deg, #fff 0%, var(--yarn-cream) 100%);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 
+                0 10px 40px var(--stitch-shadow),
+                0 0 0 4px var(--yarn-cream),
+                0 0 0 8px var(--yarn-peach);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Crochet pattern overlay */
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 10px 10px, rgba(255,107,157,0.05) 2px, transparent 2px);
+            background-size: 20px 20px;
+            pointer-events: none;
+        }
+
+        /* Yarn decoration on card */
+        .product-card::after {
+            content: '🧶';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 2.5em;
+            opacity: 0;
+            transform: rotate(-45deg) scale(0);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .product-card:hover::after {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px) rotate(1deg);
+            box-shadow: 
+                0 20px 60px rgba(255, 107, 157, 0.3),
+                0 0 0 4px var(--yarn-pink),
+                0 0 0 8px var(--yarn-mint);
+        }
+
+        /* ========== PRODUCT IMAGE PLACEHOLDER ========== */
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(145deg, var(--yarn-cream), #fff);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6em;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 4px 15px var(--stitch-shadow);
+        }
+
+        /* Stitch pattern inside image */
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(255,171,145,0.1) 10px,
+                    rgba(255,171,145,0.1) 11px
+                );
+            pointer-events: none;
+        }
+
+        .product-emoji {
+            animation: emojiFloat 3s ease-in-out infinite;
+            filter: drop-shadow(0 5px 15px var(--stitch-shadow));
+            z-index: 2;
+        }
+
+        @keyframes emojiFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(5deg); }
+            75% { transform: translateY(5px) rotate(-5deg); }
+        }
+
+        .product-card:hover .product-emoji {
+            animation: emojiBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes emojiBounce {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.3) rotate(-10deg); }
+            50% { transform: scale(0.9) rotate(10deg); }
+            75% { transform: scale(1.2) rotate(-5deg); }
+        }
+
+        /* ========== PRODUCT DETAILS ========== */
+        .product-title {
+            font-family: 'Grandstander', cursive;
+            font-size: 1.6em;
+            color: var(--yarn-brown);
+            margin: 15px 0;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .product-desc {
+            font-family: 'Patrick Hand', cursive;
+            color: #666;
+            text-align: center;
+            margin: 10px 0;
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+
+        .product-price {
+            font-family: 'Grandstander', cursive;
+            font-size: 2em;
+            color: var(--yarn-pink);
+            text-align: center;
+            font-weight: 700;
+            margin: 15px 0;
+            text-shadow: 2px 2px 4px var(--stitch-shadow);
+        }
+
+        /* ========== BUY BUTTON ========== */
+        .buy-btn {
+            font-family: 'Grandstander', cursive;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(145deg, var(--yarn-mint), #5fd3a5);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 5px 20px rgba(136, 216, 176, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .buy-btn::before {
+            content: '🧵';
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.3em;
+            transition: all 0.4s ease;
+        }
+
+        .buy-btn::after {
+            content: '→';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.3em;
+            transition: all 0.4s ease;
+        }
+
+        .buy-btn:hover {
+            background: linear-gradient(145deg, var(--yarn-pink), var(--yarn-coral));
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.5);
+        }
+
+        .buy-btn:hover::before {
+            transform: translateY(-50%) rotate(360deg);
+        }
+
+        .buy-btn:hover::after {
+            right: 15px;
+        }
+
+        .buy-btn:active {
+            transform: scale(0.98);
+        }
+        /* ========== HOME SECTION ========== */
+        .home-section {
+            text-align: center;
+            padding: 60px 30px;
+            background: linear-gradient(145deg, #fff, var(--yarn-cream));
+            border-radius: 40px;
+            box-shadow: 
+                0 20px 60px var(--stitch-shadow),
+                inset 0 0 100px rgba(255,255,255,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative crochet corners */
+        .home-section::before {
+            content: '✿❀✿';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 2em;
+            color: var(--yarn-pink);
+            animation: cornerSpin 8s linear infinite;
+        }
+
+        .home-section::after {
+            content: '✿❀✿';
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 2em;
+            color: var(--yarn-mint);
+            animation: cornerSpin 8s linear infinite reverse;
+        }
+
+        @keyframes cornerSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .home-title {
+            font-family: 'Grandstander', cursive;
+            font-size: 2.8em;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--yarn-pink), var(--yarn-lavender), var(--yarn-mint));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .home-desc {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.4em;
+            color: var(--yarn-brown);
+            line-height: 2;
+            margin: 20px 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .crochet-pattern-display {
+            font-size: 3em;
+            margin: 30px 0;
+            animation: patternPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes patternPulse {
+            0%, 100% { transform: scale(1); filter: hue-rotate(0deg); }
+            50% { transform: scale(1.1); filter: hue-rotate(30deg); }
+        }
+
+        /* ========== ABOUT SECTION ========== */
+        .about-section {
+            background: linear-gradient(145deg, #fff, var(--yarn-cream));
+            border-radius: 40px;
+            padding: 50px;
+            box-shadow: 0 20px 60px var(--stitch-shadow);
+            position: relative;
+        }
+
+        .about-section h2 {
+            font-family: 'Grandstander', cursive;
+            font-size: 2.5em;
+            color: var(--yarn-lavender);
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .about-section h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--yarn-pink), var(--yarn-mint));
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        .about-section p {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.3em;
+            color: var(--yarn-brown);
+            margin: 20px 0;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .about-feature {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .feature-item {
+            background: linear-gradient(145deg, var(--yarn-cream), #fff);
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            min-width: 200px;
+            box-shadow: 0 5px 20px var(--stitch-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.2);
+        }
+
+        .feature-item .icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        /* ========== CONTACT SECTION ========== */
+        .contact-section {
+            background: linear-gradient(145deg, #fff, var(--yarn-cream));
+            border-radius: 40px;
+            padding: 50px;
+            box-shadow: 0 20px 60px var(--stitch-shadow);
+        }
+
+        .contact-section h2 {
+            font-family: 'Grandstander', cursive;
+            font-size: 2.5em;
+            color: var(--yarn-pink);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .contact-card {
+            background: linear-gradient(145deg, var(--yarn-cream), #fff);
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 8px 25px var(--stitch-shadow);
+            transition: all 0.4s ease;
+            border: 3px solid transparent;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--yarn-pink);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.3);
+        }
+
+        .contact-card .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            animation: contactPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes contactPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .contact-card h3 {
+            font-family: 'Grandstander', cursive;
+            font-size: 1.4em;
+            color: var(--yarn-brown);
+            margin-bottom: 10px;
+        }
+
+        .contact-card a {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.2em;
+            color: var(--yarn-lavender);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card a:hover {
+            color: var(--yarn-pink);
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            position: relative;
+            z-index: 10;
+            background: linear-gradient(145deg, var(--yarn-brown), #6D4C41);
+            color: var(--yarn-cream);
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 50px;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--yarn-pink) 0px,
+                var(--yarn-pink) 20px,
+                var(--yarn-mint) 20px,
+                var(--yarn-mint) 40px,
+                var(--yarn-lavender) 40px,
+                var(--yarn-lavender) 60px
+            );
+        }
+
+        footer p {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        .footer-pattern {
+            font-size: 2em;
+            margin: 20px 0;
+            animation: footerWave 3s ease-in-out infinite;
+        }
+
+        @keyframes footerWave {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+
+        /* ========== MOBILE RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2em;
+                letter-spacing: 2px;
+            }
+
+            .owner-name {
+                font-size: 1.3em;
+                letter-spacing: 5px;
+            }
+
+            .tagline {
+                font-size: 1.1em;
+            }
+
+            header::before,
+            header::after {
+                font-size: 1.5em;
+            }
+
+            nav {
+                padding: 15px 10px;
+                gap: 10px;
+            }
+
+            .nav-btn {
+                padding: 10px 18px;
+                font-size: 0.95em;
+            }
+
+            .home-title {
+                font-size: 1.8em;
+            }
+
+            .home-desc {
+                font-size: 1.2em;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .product-image {
+                height: 180px;
+                font-size: 5em;
+            }
+
+            .about-section,
+            .contact-section {
+                padding: 30px 20px;
+            }
+
+            .about-section h2,
+            .contact-section h2 {
+                font-size: 1.8em;
+            }
+
+            .feature-item {
+                min-width: 150px;
+            }
+
+            .crochet-pattern-display {
+                font-size: 2em;
+            }
+
+            .home-section::before,
+            .home-section::after {
+                font-size: 1.5em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.6em;
+            }
+
+            .owner-name {
+                font-size: 1.1em;
+                letter-spacing: 3px;
+            }
+
+            .nav-btn {
+                padding: 8px 15px;
+                font-size: 0.85em;
+            }
+
+            .product-card {
+                padding: 20px;
+            }
+
+            .product-title {
+                font-size: 1.3em;
+            }
+
+            .product-price {
+                font-size: 1.6em;
+            }
+        }
+        /* ========== ANIMATED CHARACTER POPUP ========== */
+        .animated-character {
+            position: fixed;
+            font-size: 10em;
+            z-index: 1000;
+            pointer-events: none;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
+        }
+
+        .character-entry {
+            animation: characterBounceIn 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+
+        @keyframes characterBounceIn {
+            0% {
+                transform: scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.4) rotate(20deg);
+                opacity: 1;
+            }
+            70% {
+                transform: scale(0.9) rotate(-10deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .character-exit {
+            animation: characterFlyOut 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards;
+        }
+
+        @keyframes characterFlyOut {
+            0% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0) rotate(180deg) translateY(-200px);
+                opacity: 0;
+            }
+        }
+
+        /* ========== LOADING SPINNER ========== */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 248, 231, 0.95);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .loading-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .loading-yarn {
+            font-size: 5em;
+            animation: yarnSpin 1s linear infinite;
+        }
+
+        @keyframes yarnSpin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.3); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .loading-text {
+            font-family: 'Grandstander', cursive;
+            font-size: 1.5em;
+            color: var(--yarn-pink);
+            margin-top: 20px;
+            animation: textPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes textPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* ========== FLOATING YARN BALLS ========== */
+        .floating-yarn {
+            position: fixed;
+            font-size: 2.5em;
+            z-index: 5;
+            pointer-events: none;
+            opacity: 0.7;
+            animation: floatingAnimation 15s linear infinite;
+        }
+
+        @keyframes floatingAnimation {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* ========== TOOLTIP STYLES ========== */
+        .tooltip {
+            position: fixed;
+            background: linear-gradient(145deg, var(--yarn-pink), var(--yarn-coral));
+            color: white;
+            padding: 15px 25px;
+            border-radius: 20px;
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.2em;
+            z-index: 3000;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+            animation: tooltipPop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            white-space: nowrap;
+        }
+
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 10px solid transparent;
+            border-top-color: var(--yarn-coral);
+        }
+
+        @keyframes tooltipPop {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ========== SUCCESS MESSAGE ========== */
+        .success-msg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(145deg, var(--yarn-mint), #5fd3a5);
+            color: white;
+            padding: 30px 50px;
+            border-radius: 30px;
+            font-family: 'Grandstander', cursive;
+            font-size: 1.5em;
+            z-index: 3000;
+            box-shadow: 0 20px 60px rgba(136, 216, 176, 0.5);
+            text-align: center;
+            animation: successPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes successPop {
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotate(-10deg);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1) rotate(5deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Yarn Decorations Background -->
+    <div class="yarn-decoration">🧶</div>
+    <div class="yarn-decoration">🧵</div>
+    <div class="yarn-decoration">🎀</div>
+    <div class="yarn-decoration">💝</div>
+    <div class="yarn-decoration">✨</div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-yarn">🧶</div>
+        <div class="loading-text">Stitching your page...</div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">🧶 THE YARN TALES 🧶</div>
+        <div class="tagline">~ Handcrafted with Love & Every Stitch ~</div>
+        <div class="owner-name">ISHIKA SINGH</div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <button class="nav-btn active" data-section="home" onclick="showSection('home', '🏠')">
+            🏠 Home
+        </button>
+        <button class="nav-btn" data-section="teddybear" onclick="showSection('teddybear', '🧸')">
+            🧸 Teddy Bears
+        </button>
+        <button class="nav-btn" data-section="accessories" onclick="showSection('accessories', '👜')">
+            👜 Accessories
+        </button>
+        <button class="nav-btn" data-section="toys" onclick="showSection('toys', '🎀')">
+            🎀 Toys
+        </button>
+        <button class="nav-btn" data-section="keychains" onclick="showSection('keychains', '🔑')">
+            🔑 Keychains
+        </button>
+        <button class="nav-btn" data-section="about" onclick="showSection('about', '💝')">
+            💝 About
+        </button>
+        <button class="nav-btn" data-section="contact" onclick="showSection('contact', '📞')">
+            📞 Contact
+        </button>
+    </nav>
+    <!-- Main Container -->
+    <div class="container">
+        
+        <!-- ========== HOME SECTION ========== -->
+        <div id="home" class="product-section active">
+            <div class="home-section">
+                <h1 class="home-title">Welcome to The Yarn Tales! ✨</h1>
+                
+                <div class="crochet-pattern-display">
+                    🧶 ✿ 🎀 ✿ 🧵 ✿ 💝 ✿ 🧶
+                </div>
+                
+                <p class="home-desc">
+                    ✨ Discover the magic of handmade crochet creations! ✨
+                    <br><br>
+                    Each piece is crafted with love, care, and premium quality yarn. 
+                    From adorable teddy bears to stylish accessories, 
+                    we bring your dreams to life, one stitch at a time.
+                </p>
+                
+                <div class="about-feature">
+                    <div class="feature-item">
+                        <div class="icon">🧶</div>
+                        <p><strong>100% Handmade</strong></p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">🎨</div>
+                        <p><strong>Customizable</strong></p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">💝</div>
+                        <p><strong>Perfect Gifts</strong></p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">🧸</div>
+                        <p><strong>Soft & Durable</strong></p>
+                    </div>
+                </div>
+                
+                <div class="crochet-pattern-display">
+                    🌸 〰️ 🌸 〰️ 🌸 〰️ 🌸
+                </div>
+                
+                <p class="home-desc">
+                    🌈 Every purchase supports handmade artistry! 🌈
+                </p>
+            </div>
+        </div>
+        <!-- ========== TEDDY BEARS SECTION ========== -->
+        <div id="teddybear" class="product-section">
+            <div class="home-section" style="padding: 30px;">
+                <h2 class="home-title">🧸 Crochet Teddy Bears 🧸</h2>
+                <p class="home-desc">Adorable, cuddly, and made with love!</p>
+            </div>
+            
+            <div class="product-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">🧸</span>
+                    </div>
+                    <h3 class="product-title">Classic Teddy Bear</h3>
+                    <p class="product-desc">Soft, cuddly, and perfect for all ages. Made with premium acrylic yarn. Size: 12 inches</p>
+                    <p class="product-price">₹599</p>
+                    <button class="buy-btn" onclick="buyProduct('Classic Teddy Bear', '₹599')">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">🐻</span>
+                    </div>
+                    <h3 class="product-title">Mini Teddy Bear</h3>
+                    <p class="product-desc">Pocket-sized cuteness! Perfect as a keychain or desk buddy. Size: 4 inches</p>
+                    <p class="product-price">₹299</p>
+                    <button class="buy-btn" onclick="buyProduct('Mini Teddy Bear', '₹299')">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">🧸</span>
+                    </div>
+                    <h3 class="product-title">Giant Teddy Bear</h3>
+                    <p class="product-desc">Extra large and extra huggable! The ultimate cuddle companion. Size: 24 inches</p>
+                    <p class="product-price">₹1299</p>
+                    <button class="buy-btn" onclick="buyProduct('Giant Teddy Bear', '₹1299')">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">🎀</span>
+                    </div>
+                    <h3 class="product-title">Dressed Teddy Bear</h3>
+                    <p class="product-desc">Adorable teddy with cute outfit. Customizable colors and outfits available!</p>
+                    <p class="product-price">₹799</p>
+                    <button class="buy-btn" onclick="buyProduct('Dressed Teddy Bear', '₹799')">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">💕</span>
+                    </div>
+                    <h3 class="product-title">Couple Teddy Set</h3>
+                    <p class="product-desc">Perfect pair for couples! Comes with matching outfits. Set of 2</p>
+                    <p class="product-price">₹999</p>
+                    <button class="buy-btn" onclick="buyProduct('Couple Teddy Set', '₹999')">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">🌈</span>
+                    </div>
+                    <h3 class="product-title">Rainbow Teddy Bear</h3>
+                    <p class="product-desc">Colorful rainbow-themed teddy! Brighten up any room. Size: 10 inches</p>
+                    <p class="product-price">₹699</p>
+                    <button class="buy-btn" onclick="buyProduct('Rainbow Teddy Bear', '₹699')">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- ========== ACCESSORIES SECTION ========== -->
+        <div id="accessories" class="product-section">
+            <div class="home-section" style="padding: 30px;">
+                <h2 class="home-title">👜 Crochet Accessories 👜</h2>
+                <p class="home-desc">Stylish handmade accessories for everyday use!</p>
+            </div>
+            
+            <div class="product-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">👜</span>
+                    </div>
+                    <h3 class="product-title">Crochet Tote Bag</h3>
+                    <p class="product-desc">Stylish and eco-friendly. Perfect for daily use or beach trips. Multiple colors available.</p>
+                    <p class="product-price">₹799</p>
+                    <button class="buy-btn" onclick="buyProduct('Crochet Tote Bag', '₹799')">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">🧢</span>
+                    </div>
+                    <h3 class="product-title">Crochet Beanie</h3>
+                    <p class="product-desc">Warm and fashionable. Perfect for winter. Available in all sizes.</p>
+                    <p class="product-price">₹399</p>
+                    <button class="buy-btn" onclick="buyProduct('Crochet Beanie', '₹399')">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">🧣</span>
+                    </div>
+                    <h3 class="product-title">Crochet Scarf</h3>
+                    <p class="product-desc">Cozy and elegant. Perfect accessory for winter season. Length: 60 inches</p>
+                    <p class="product-price">₹549</p>
+                    <button class="buy-btn" onclick="buyProduct('Crochet Scarf', '₹549')">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">🌸</span>
+                    </div>
+                    <h3 class="product-title">Hair Scrunchies (Set of 5)</h3>
+                    <p class="product-desc">Beautiful crochet scrunchies in assorted colors. Gentle on hair.</p>
+                    <p class="product-price">₹249</p>
+                    <button class="buy-btn" onclick="buyProduct('Hair Scrunchies Set', '₹249')">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">🎀</span>
+                    </div>
+                    <h3 class="product-title">Crochet Headband</h3>
+                    <p class="product-desc">Adorable headband with flower design. Perfect for all ages.</p>
+                    <p class="product-price">₹199</p>
+                    <button class="buy-btn" onclick="buyProduct('Crochet Headband', '₹199')">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">📱</span>
+                    </div>
+                    <h3 class="product-title">Phone Pouch</h3>
+                    <p class="product-desc">Cute crochet phone holder with strap. Fits most smartphones.</p>
+                    <p class="product-price">₹349</p>
+                    <button class="buy-btn" onclick="buyProduct('Phone Pouch', '₹349')">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- ========== TOYS SECTION ========== -->
+        <div id="toys" class="product-section">
+            <div class="home-section" style="padding: 30px;">
+                <h2 class="home-title">🎀 Crochet Toys 🎀</h2>
+                <p class="home-desc">Adorable handmade toys for kids of all ages!</p>
+            </div>
+            
+            <div class="product-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">🐰</span>
+                    </div>
+                    <h3 class="product-title">Bunny Plush</h3>
+                    <p class="product-desc">Adorable bunny with floppy ears. Kids' favorite! Size: 10 inches</p>
+                    <p class="product-price">₹549</p>
+                    <button class="buy-btn" onclick="buyProduct('Bunny Plush', '₹549')">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">🦆</span>
+                    </div>
+                    <h3 class="product-title">Duck Toy</h3>
+                    <p class="product-desc">Cute little duck perfect for babies and toddlers. Soft and safe.</p>
+                    <p class="product-price">₹399</p>
+                    <button class="buy-btn" onclick="buyProduct('Duck Toy', '₹399')">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">🐸</span>
+                    </div>
+                    <h3 class="product-title">Frog Prince</h3>
+                    <p class="product-desc">Charming frog character with a tiny crown! Kids love it!</p>
+                    <p class="product-price">₹449</p>
+                    <button class="buy-btn" onclick="buyProduct('Frog Prince', '₹449')">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">🦄</span>
+                    </div>
+                    <h3 class="product-title">Unicorn Magic</h3>
+                    <p class="product-desc">Magical unicorn with rainbow mane and tail. Pure enchantment!</p>
+                    <p class="product-price">₹749</p>
+                    <button class="buy-btn" onclick="buyProduct('Unicorn Magic', '₹749')">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">🐱</span>
+                    </div>
+                    <h3 class="product-title">Kitty Cat</h3>
+                    <p class="product-desc">Adorable crochet cat with whiskers. Comes with a tiny bow.</p>
+                    <p class="product-price">₹499</p>
+                    <button class="buy-btn" onclick="buyProduct('Kitty Cat', '₹499')">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">🐙</span>
+                    </div>
+                    <h3 class="product-title">Octopus Friend</h3>
+                    <p class="product-desc">Cute octopus with curly tentacles. Multiple colors available!</p>
+                    <p class="product-price">₹599</p>
+                    <button class="buy-btn" onclick="buyProduct('Octopus Friend', '₹599')">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- ========== KEYCHAINS SECTION ========== -->
+        <div id="keychains" class="product-section">
+            <div class="home-section" style="padding: 30px;">
+                <h2 class="home-title">🔑 Crochet Keychains 🔑</h2>
+                <p class="home-desc">Tiny treasures to carry everywhere!</p>
+            </div>
+            
+            <div class="product-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">🍓</span>
+                    </div>
+                    <h3 class="product-title">Strawberry Keychain</h3>
+                    <p class="product-desc">Sweet little strawberry to brighten your keys!</p>
+                    <p class="product-price">₹149</p>
+                    <button class="buy-btn" onclick="buyProduct('Strawberry Keychain', '₹149')">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">🌻</span>
+                    </div>
+                    <h3 class="product-title">Sunflower Keychain</h3>
+                    <p class="product-desc">Cheerful sunflower to spread happiness!</p>
+                    <p class="product-price">₹149</p>
+                    <button class="buy-btn" onclick="buyProduct('Sunflower Keychain', '₹149')">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">🍄</span>
+                    </div>
+                    <h3 class="product-title">Mushroom Keychain</h3>
+                    <p class="product-desc">Cute little mushroom with polka dots!</p>
+                    <p class="product-price">₹129</p>
+                    <button class="buy-btn" onclick="buyProduct('Mushroom Keychain', '₹129')">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">💖</span>
+                    </div>
+                    <h3 class="product-title">Heart Keychain</h3>
+                    <p class="product-desc">Perfect gift for your loved ones!</p>
+                    <p class="product-price">₹99</p>
+                    <button class="buy-btn" onclick="buyProduct('Heart Keychain', '₹99')">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">⭐</span>
+                    </div>
+                    <h3 class="product-title">Star Keychain</h3>
+                    <p class="product-desc">Twinkle twinkle little star for your bag!</p>
+                    <p class="product-price">₹99</p>
+                    <button class="buy-btn" onclick="buyProduct('Star Keychain', '₹99')">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-emoji">🐝</span>
+                    </div>
+                    <h3 class="product-title">Bee Keychain</h3>
+                    <p class="product-desc">Buzzy little bee to accompany you!</p>
+                    <p class="product-price">₹169</p>
+                    <button class="buy-btn" onclick="buyProduct('Bee Keychain', '₹169')">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- ========== ABOUT SECTION ========== -->
+        <div id="about" class="product-section">
+            <div class="about-section">
+                <h2>💝 About The Yarn Tales 💝</h2>
+                
+                <p>
+                    <strong style="font-size: 1.3em; color: var(--yarn-pink);">THE YARN TALES</strong> 
+                    is a passion project by <strong style="color: var(--yarn-lavender);">ISHIKA SINGH</strong>, 
+                    a dedicated crochet artist who believes in the magic of handmade creations.
+                </p>
+                
+                <div class="crochet-pattern-display">
+                    🧶 ✿ 💕 ✿ 🧶
+                </div>
+                
+                <p>
+                    Every product is crafted with love, patience, and attention to detail.
+                    We believe that handmade items carry a special warmth that 
+                    mass-produced products simply cannot replicate.
+                </p>
+                
+                <div class="about-feature">
+                    <div class="feature-item">
+                        <div class="icon">🧶</div>
+                        <p><strong>Premium Yarn</strong><br>Only the softest, safest materials</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">🎨</div>
+                        <p><strong>Custom Orders</strong><br>Your imagination, our creation</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">💝</div>
+                        <p><strong>Made with Love</strong><br>Every stitch tells a story</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">🚚</div>
+                        <p><strong>Pan India Delivery</strong><br>We ship everywhere!</p>
+                    </div>
+                </div>
+                
+                <div class="crochet-pattern-display">
+                    🌸 〰️ 🌸 〰️ 🌸
+                </div>
+                
+                <p>
+                    ✨ Our mission is to bring joy and warmth through handmade artistry. ✨
+                    <br>
+                    Every stitch tells a story, and we're here to make your moments special!
+                </p>
+            </div>
+        </div>
+        
+        <!-- ========== CONTACT SECTION ========== -->
+        <div id="contact" class="product-section">
+            <div class="contact-section">
+                <h2>📞 Get In Touch 📞</h2>
+                
+                <p style="text-align: center; font-size: 1.3em; color: var(--yarn-brown); margin-bottom: 30px;">
+                    Have questions or want to place a custom order? <br>
+                    We'd love to hear from you! 💕
+                </p>
+                
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="icon">📧</div>
+                        <h3>Email Us</h3>
+                        <a href="mailto:ishikasingh@theyarntales.com">ishikasingh@theyarntales.com</a>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="icon">📱</div>
+                        <h3>WhatsApp</h3>
+                        <a href="https://wa.me/919999999999">+91 99999 99999</a>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="icon">📷</div>
+                        <h3>Instagram</h3>
+                        <a href="https://instagram.com/theyarntales">@theyarntales</a>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="icon">🏠</div>
+                        <h3>Location</h3>
+                        <a href="#">Made with love from India 🇮🇳</a>
+                    </div>
+                </div>
+                
+                <div class="crochet-pattern-display">
+                    💌 🧶 💌 🧶 💌
+                </div>
+                
+                <p style="text-align: center; font-size: 1.2em; color: var(--yarn-brown);">
+                    <strong>Custom orders welcome!</strong> 🎨<br>
+                    Tell us your dream, and we'll crochet it for you!
+                </p>
+            </div>
+        </div>
+        
+    </div><!-- End Container -->
+    <!-- Footer -->
+    <footer>
+        <div class="footer-pattern">
+            🧶 ✿ 🧵 ✿ 🎀 ✿ 💝 ✿ 🧶
+        </div>
+        <p>🧶 <strong>THE YARN TALES</strong> 🧶</p>
+        <p>Handcrafted with Love by <strong>ISHIKA SINGH</strong></p>
+        <p>© 2024 All Rights Reserved</p>
+        <p style="margin-top: 15px; font-size: 1.1em;">
+            ✨ Every Stitch Tells a Story ✨
+        </p>
+        <div class="footer-pattern">
+            🌸 〰️ 🌸 〰️ 🌸 〰️ 🌸
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // ========== SECTION NAVIGATION ==========
+        function showSection(sectionId, emoji) {
+            // Show loading
+            showLoading();
+            
+            setTimeout(() => {
+                // Hide all sections
+                const sections = document.querySelectorAll('.product-section');
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show selected section
+                document.getElementById(sectionId).classList.add('active');
+                
+                // Update active nav button
+                const navBtns = document.querySelectorAll('.nav-btn');
+                navBtns.forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.getAttribute('data-section') === sectionId) {
+                        btn.classList.add('active');
+                    }
+                });
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Hide loading
+                hideLoading();
+                
+                // Show animated character
+                showAnimatedCharacter(emoji);
+                
+            }, 600);
+        }
+
+        // ========== LOADING FUNCTIONS ==========
+        function showLoading() {
+            document.getElementById('loadingOverlay').classList.add('active');
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingOverlay').classList.remove('active');
+        }
+
+        // ========== ANIMATED CHARACTER ==========
+        function showAnimatedCharacter(emoji) {
+            // Remove existing character
+            const existing = document.querySelector('.animated-character');
+            if (existing) existing.remove();
+            
+            // Create new character
+            const character = document.createElement('div');
+            character.className = 'animated-character character-entry';
+            character.textContent = emoji;
+            character.style.top = '50%';
+            character.style.left = '50%';
+            character.style.transform = 'translate(-50%, -50%)';
+            
+            document.body.appendChild(character);
+            
+            // Remove after animation
+            setTimeout(() => {
+                character.classList.remove('character-entry');
+                character.classList.add('character-exit');
+                
+                setTimeout(() => {
+                    character.remove();
+                }, 800);
+            }, 1500);
+        }
+
+        // ========== BUY PRODUCT FUNCTION ==========
+        function buyProduct(productName, price) {
+            // Create success message
+            const msg = document.createElement('div');
+            msg.className = 'success-msg';
+            msg.innerHTML = `
+                🧶 Added to Cart! 🧶<br>
+                <span style="font-size: 0.8em;">${productName}</span><br>
+                <span style="font-size: 0.9em;">${price}</span><br>
+                <span style="font-size: 0.7em; margin-top: 10px; display: block;">
+                    Contact us to complete your order!
+                </span>
+            `;
+            
+            document.body.appendChild(msg);
+            
+            // Remove after delay
+            setTimeout(() => {
+                msg.style.animation = 'characterFlyOut 0.5s ease forwards';
+                setTimeout(() => msg.remove(), 500);
+            }, 2500);
+        }
+
+        // ========== FLOATING YARN ANIMATION ==========
+        function createFloatingYarn() {
+            const emojis = ['🧶', '🧵', '✨', '💝', '🎀', '🌸', '✿'];
+            const yarn = document.createElement('div');
+            yarn.className = 'floating-yarn';
+            yarn.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            yarn.style.left = Math.random() * 100 + '%';
+            yarn.style.animationDuration = (10 + Math.random() * 10) + 's';
+            
+            document.body.appendChild(yarn);
+            
+            // Remove after animation
+            setTimeout(() => yarn.remove(), 20000);
+        }
+
+        // Create floating yarns periodically
+        setInterval(createFloatingYarn, 4000);
+
+        // ========== INITIAL LOAD ==========
+        window.addEventListener('load', () => {
+            // Show welcome character
+            setTimeout(() => {
+                showAnimatedCharacter('🧶');
+            }, 500);
+            
+            // Create initial floating yarns
+            for (let i = 0; i < 3; i++) {
+                setTimeout(createFloatingYarn, i * 1500);
+            }
+        });
+
+        // ========== TOUCH FEEDBACK FOR MOBILE ==========
+        document.querySelectorAll('.nav-btn, .buy-btn, .product-card').forEach(elem => {
+            elem.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.95)';
+            });
+            elem.addEventListener('touchend', function() {
+                this.style.transform = '';
+            });
+        });
+    </script>
+</body>
+</html>
