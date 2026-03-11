@@ -640,10 +640,46 @@
 
         .order-product-price {
             font-family: 'Grandstander', cursive;
-            font-size: 1.5em;
-            color: var(--primary);
-            font-weight: 700;
+            font-size: 1.2em;
+            color: var(--text-light);
             margin-top: 5px;
+        }
+
+        /* ========== LIVE PRICE DISPLAY ========== */
+        .price-calculator {
+            background: var(--gradient-1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            color: white;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 8px 0;
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.1em;
+        }
+
+        .price-row.total {
+            border-top: 2px dashed rgba(255,255,255,0.5);
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+
+        .total-price {
+            font-family: 'Grandstander', cursive;
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        .total-label {
+            font-family: 'Grandstander', cursive;
+            font-size: 1.2em;
+            font-weight: 600;
         }
 
         /* ========== FORM STYLES ========== */
@@ -680,52 +716,6 @@
         .form-textarea {
             min-height: 80px;
             resize: vertical;
-        }
-
-        /* ========== SIZE OPTIONS ========== */
-        .size-options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .size-option {
-            flex: 1;
-            min-width: 70px;
-            padding: 12px 8px;
-            border: 2px solid var(--secondary);
-            border-radius: 12px;
-            background: var(--background);
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .size-option:hover {
-            border-color: var(--primary);
-        }
-
-        .size-option.selected {
-            border-color: var(--primary);
-            background: var(--gradient-1);
-            color: white;
-        }
-
-        .size-option input {
-            display: none;
-        }
-
-        .size-label {
-            font-family: 'Grandstander', cursive;
-            font-weight: 600;
-            font-size: 1em;
-            display: block;
-        }
-
-        .size-desc {
-            font-size: 0.8em;
-            opacity: 0.8;
-            margin-top: 3px;
         }
 
         /* ========== COLOR OPTIONS ========== */
@@ -840,13 +830,16 @@
             align-items: center;
             justify-content: center;
             gap: 15px;
+            background: var(--background);
+            padding: 15px;
+            border-radius: 15px;
         }
 
         .qty-btn {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border: 2px solid var(--primary);
-            background: var(--background);
+            background: var(--card-bg);
             border-radius: 50%;
             font-size: 1.5em;
             font-weight: bold;
@@ -865,10 +858,10 @@
 
         .qty-value {
             font-family: 'Grandstander', cursive;
-            font-size: 1.5em;
+            font-size: 2em;
             font-weight: 700;
             color: var(--text-dark);
-            min-width: 50px;
+            min-width: 60px;
             text-align: center;
         }
         /* ========== HOME SECTION ========== */
@@ -1291,13 +1284,17 @@
                 font-size: 1.4em;
             }
 
-            .size-options {
-                gap: 8px;
+            .qty-btn {
+                width: 40px;
+                height: 40px;
             }
 
-            .size-option {
-                min-width: 60px;
-                padding: 10px 6px;
+            .qty-value {
+                font-size: 1.6em;
+            }
+
+            .total-price {
+                font-size: 1.5em;
             }
 
             .about-section,
@@ -1392,6 +1389,10 @@
 
             .order-modal-content {
                 padding: 20px 15px;
+            }
+
+            .price-calculator {
+                padding: 15px;
             }
         }
 
@@ -1508,7 +1509,7 @@
             <div class="order-product-info">
                 <div class="order-product-emoji" id="modalProductEmoji">🧸</div>
                 <div class="order-product-name" id="modalProductName">Product Name</div>
-                <div class="order-product-price" id="modalProductPrice">₹599</div>
+                <div class="order-product-price">Unit Price: <span id="modalProductPrice">₹599</span></div>
             </div>
             
             <!-- Quantity -->
@@ -1521,30 +1522,19 @@
                 </div>
             </div>
             
-            <!-- Size Options -->
-            <div class="form-group" id="sizeGroup">
-                <label class="form-label">📏 Size / Measurement</label>
-                <div class="size-options" id="sizeOptions">
-                    <label class="size-option selected" onclick="selectSize(this)">
-                        <input type="radio" name="size" value="Small (4-6 inch)" checked>
-                        <span class="size-label">S</span>
-                        <span class="size-desc">4-6"</span>
-                    </label>
-                    <label class="size-option" onclick="selectSize(this)">
-                        <input type="radio" name="size" value="Medium (8-10 inch)">
-                        <span class="size-label">M</span>
-                        <span class="size-desc">8-10"</span>
-                    </label>
-                    <label class="size-option" onclick="selectSize(this)">
-                        <input type="radio" name="size" value="Large (12-14 inch)">
-                        <span class="size-label">L</span>
-                        <span class="size-desc">12-14"</span>
-                    </label>
-                    <label class="size-option" onclick="selectSize(this)">
-                        <input type="radio" name="size" value="XL (18-24 inch)">
-                        <span class="size-label">XL</span>
-                        <span class="size-desc">18-24"</span>
-                    </label>
+            <!-- Live Price Calculator -->
+            <div class="price-calculator">
+                <div class="price-row">
+                    <span>Unit Price:</span>
+                    <span id="displayUnitPrice">₹599</span>
+                </div>
+                <div class="price-row">
+                    <span>Quantity:</span>
+                    <span>× <span id="displayQty">1</span></span>
+                </div>
+                <div class="price-row total">
+                    <span class="total-label">💰 Total:</span>
+                    <span class="total-price" id="displayTotalPrice">₹599</span>
                 </div>
             </div>
             
@@ -1560,6 +1550,8 @@
                     <div class="color-option" style="background: #FFEB3B;" onclick="selectColor(this, 'Yellow')" title="Yellow"></div>
                     <div class="color-option" style="background: #F5F5F5;" onclick="selectColor(this, 'White')" title="White"></div>
                     <div class="color-option" style="background: #8D6E63;" onclick="selectColor(this, 'Brown')" title="Brown"></div>
+                    <div class="color-option" style="background: #EF5350;" onclick="selectColor(this, 'Red')" title="Red"></div>
+                    <div class="color-option" style="background: #424242;" onclick="selectColor(this, 'Black')" title="Black"></div>
                 </div>
             </div>
             
@@ -1573,11 +1565,7 @@
             <div class="custom-order-fields" id="customOrderFields">
                 <div class="form-group">
                     <label class="form-label">📝 Describe Your Custom Order</label>
-                    <textarea class="form-textarea" id="customDescription" placeholder="E.g., Want a purple unicorn with golden horn, 15 inch size, with name 'Priya' embroidered..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">📐 Custom Size (if different)</label>
-                    <input type="text" class="form-input" id="customSize" placeholder="E.g., 20 inch, 30 cm, etc.">
+                    <textarea class="form-textarea" id="customDescription" placeholder="E.g., Want a purple unicorn with golden horn, with name 'Priya' embroidered..."></textarea>
                 </div>
             </div>
             
@@ -1732,7 +1720,7 @@
                     <h3 class="product-title">Classic Teddy Bear</h3>
                     <p class="product-desc">Soft & cuddly, perfect for all ages. 12 inches</p>
                     <p class="product-price">₹599</p>
-                    <button class="buy-btn" onclick="openOrderModal('Classic Teddy Bear', '₹599', '🧸')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Classic Teddy Bear', 599, '🧸')">Order Now 🛒</button>
                 </div>
                 
                 <div class="product-card">
@@ -1742,7 +1730,7 @@
                     <h3 class="product-title">Mini Teddy Bear</h3>
                     <p class="product-desc">Pocket-sized cuteness! Perfect keychain. 4 inches</p>
                     <p class="product-price">₹299</p>
-                    <button class="buy-btn" onclick="openOrderModal('Mini Teddy Bear', '₹299', '🐻')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Mini Teddy Bear', 299, '🐻')">Order Now 🛒</button>
                 </div>
                 
                 <div class="product-card">
@@ -1752,7 +1740,7 @@
                     <h3 class="product-title">Giant Teddy Bear</h3>
                     <p class="product-desc">Extra large & huggable! 24 inches</p>
                     <p class="product-price">₹1299</p>
-                    <button class="buy-btn" onclick="openOrderModal('Giant Teddy Bear', '₹1299', '🧸')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Giant Teddy Bear', 1299, '🧸')">Order Now 🛒</button>
                 </div>
                 
                 <div class="product-card">
@@ -1762,7 +1750,7 @@
                     <h3 class="product-title">Couple Teddy Set</h3>
                     <p class="product-desc">Perfect pair for couples! Set of 2</p>
                     <p class="product-price">₹999</p>
-                    <button class="buy-btn" onclick="openOrderModal('Couple Teddy Set', '₹999', '💕')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Couple Teddy Set', 999, '💕')">Order Now 🛒</button>
                 </div>
                 
                 <div class="product-card">
@@ -1772,7 +1760,7 @@
                     <h3 class="product-title">Rainbow Teddy</h3>
                     <p class="product-desc">Colorful rainbow-themed teddy! 10 inches</p>
                     <p class="product-price">₹699</p>
-                    <button class="buy-btn" onclick="openOrderModal('Rainbow Teddy', '₹699', '🌈')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Rainbow Teddy', 699, '🌈')">Order Now 🛒</button>
                 </div>
                 
                 <div class="product-card">
@@ -1782,7 +1770,7 @@
                     <h3 class="product-title">Dressed Teddy</h3>
                     <p class="product-desc">Teddy with cute outfit! Customizable</p>
                     <p class="product-price">₹799</p>
-                    <button class="buy-btn" onclick="openOrderModal('Dressed Teddy', '₹799', '🎀')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Dressed Teddy', 799, '🎀')">Order Now 🛒</button>
                 </div>
             </div>
         </div>
@@ -1802,7 +1790,7 @@
                     <h3 class="product-title">Crochet Tote Bag</h3>
                     <p class="product-desc">Stylish & eco-friendly. Multiple colors!</p>
                     <p class="product-price">₹799</p>
-                    <button class="buy-btn" onclick="openOrderModal('Crochet Tote Bag', '₹799', '👜')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Crochet Tote Bag', 799, '👜')">Order Now 🛒</button>
                 </div>
                 
                 <div class="product-card">
@@ -1812,7 +1800,7 @@
                     <h3 class="product-title">Crochet Beanie</h3>
                     <p class="product-desc">Warm & fashionable. All sizes!</p>
                     <p class="product-price">₹399</p>
-                    <button class="buy-btn" onclick="openOrderModal('Crochet Beanie', '₹399', '🧢')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Crochet Beanie', 399, '🧢')">Order Now 🛒</button>
                 </div>
                 
                 <div class="product-card">
@@ -1822,7 +1810,7 @@
                     <h3 class="product-title">Crochet Scarf</h3>
                     <p class="product-desc">Cozy & elegant. 60 inches long</p>
                     <p class="product-price">₹549</p>
-                    <button class="buy-btn" onclick="openOrderModal('Crochet Scarf', '₹549', '🧣')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Crochet Scarf', 549, '🧣')">Order Now 🛒</button>
                 </div>
                 
                 <div class="product-card">
@@ -1832,7 +1820,7 @@
                     <h3 class="product-title">Scrunchies Set (5)</h3>
                     <p class="product-desc">Beautiful assorted colors. Gentle on hair</p>
                     <p class="product-price">₹249</p>
-                    <button class="buy-btn" onclick="openOrderModal('Scrunchies Set (5)', '₹249', '🌸')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Scrunchies Set (5)', 249, '🌸')">Order Now 🛒</button>
                 </div>
                 
                 <div class="product-card">
@@ -1842,7 +1830,7 @@
                     <h3 class="product-title">Phone Pouch</h3>
                     <p class="product-desc">Cute crochet phone holder with strap</p>
                     <p class="product-price">₹349</p>
-                    <button class="buy-btn" onclick="openOrderModal('Phone Pouch', '₹349', '📱')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Phone Pouch', 349, '📱')">Order Now 🛒</button>
                 </div>
                 
                 <div class="product-card">
@@ -1852,7 +1840,7 @@
                     <h3 class="product-title">Headband</h3>
                     <p class="product-desc">Adorable with flower design</p>
                     <p class="product-price">₹199</p>
-                    <button class="buy-btn" onclick="openOrderModal('Headband', '₹199', '🎀')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Headband', 199, '🎀')">Order Now 🛒</button>
                 </div>
             </div>
         </div>
@@ -1871,7 +1859,7 @@
                     <h3 class="product-title">Bunny Plush</h3>
                     <p class="product-desc">Adorable bunny with floppy ears. 10 inches</p>
                     <p class="product-price">₹549</p>
-                    <button class="buy-btn" onclick="openOrderModal('Bunny Plush', '₹549', '🐰')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Bunny Plush', 549, '🐰')">Order Now 🛒</button>
                 </div>
                 
                 <div class="product-card">
@@ -1881,7 +1869,7 @@
                     <h3 class="product-title">Unicorn Magic</h3>
                     <p class="product-desc">Magical with rainbow mane!</p>
                     <p class="product-price">₹749</p>
-                    <button class="buy-btn" onclick="openOrderModal('Unicorn Magic', '₹749', '🦄')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Unicorn Magic', 749, '🦄')">Order Now 🛒</button>
                 </div>
                 
                 <div class="product-card">
@@ -1891,7 +1879,7 @@
                     <h3 class="product-title">Kitty Cat</h3>
                     <p class="product-desc">Adorable cat with whiskers & bow</p>
                     <p class="product-price">₹499</p>
-                    <button class="buy-btn" onclick="openOrderModal('Kitty Cat', '₹499', '🐱')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Kitty Cat', 499, '🐱')">Order Now 🛒</button>
                 </div>
                 
                 <div class="product-card">
@@ -1901,7 +1889,7 @@
                     <h3 class="product-title">Octopus Friend</h3>
                     <p class="product-desc">Cute with curly tentacles!</p>
                     <p class="product-price">₹599</p>
-                    <button class="buy-btn" onclick="openOrderModal('Octopus Friend', '₹599', '🐙')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Octopus Friend', 599, '🐙')">Order Now 🛒</button>
                 </div>
                 
                 <div class="product-card">
@@ -1911,7 +1899,7 @@
                     <h3 class="product-title">Duck Toy</h3>
                     <p class="product-desc">Perfect for babies. Soft & safe</p>
                     <p class="product-price">₹399</p>
-                    <button class="buy-btn" onclick="openOrderModal('Duck Toy', '₹399', '🦆')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Duck Toy', 399, '🦆')">Order Now 🛒</button>
                 </div>
                 
                 <div class="product-card">
@@ -1921,7 +1909,7 @@
                     <h3 class="product-title">Frog Prince</h3>
                     <p class="product-desc">Charming frog with tiny crown!</p>
                     <p class="product-price">₹449</p>
-                    <button class="buy-btn" onclick="openOrderModal('Frog Prince', '₹449', '🐸')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Frog Prince', 449, '🐸')">Order Now 🛒</button>
                 </div>
             </div>
         </div>
@@ -1941,7 +1929,7 @@
                     <h3 class="product-title">Strawberry</h3>
                     <p class="product-desc">Sweet little strawberry charm!</p>
                     <p class="product-price">₹149</p>
-                    <button class="buy-btn" onclick="openOrderModal('Strawberry Keychain', '₹149', '🍓')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Strawberry Keychain', 149, '🍓')">Order Now 🛒</button>
                 </div>
                 
                 <div class="product-card">
@@ -1951,7 +1939,7 @@
                     <h3 class="product-title">Sunflower</h3>
                     <p class="product-desc">Cheerful sunflower charm!</p>
                     <p class="product-price">₹149</p>
-                    <button class="buy-btn" onclick="openOrderModal('Sunflower Keychain', '₹149', '🌻')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Sunflower Keychain', 149, '🌻')">Order Now 🛒</button>
                 </div>
                 
                 <div class="product-card">
@@ -1961,7 +1949,7 @@
                     <h3 class="product-title">Heart</h3>
                     <p class="product-desc">Perfect gift for loved ones!</p>
                     <p class="product-price">₹99</p>
-                    <button class="buy-btn" onclick="openOrderModal('Heart Keychain', '₹99', '💖')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Heart Keychain', 99, '💖')">Order Now 🛒</button>
                 </div>
                 
                 <div class="product-card">
@@ -1971,7 +1959,7 @@
                     <h3 class="product-title">Buzzy Bee</h3>
                     <p class="product-desc">Cute little bee companion!</p>
                     <p class="product-price">₹169</p>
-                    <button class="buy-btn" onclick="openOrderModal('Buzzy Bee Keychain', '₹169', '🐝')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Buzzy Bee Keychain', 169, '🐝')">Order Now 🛒</button>
                 </div>
                 
                 <div class="product-card">
@@ -1981,7 +1969,7 @@
                     <h3 class="product-title">Mushroom</h3>
                     <p class="product-desc">Cute with polka dots!</p>
                     <p class="product-price">₹129</p>
-                    <button class="buy-btn" onclick="openOrderModal('Mushroom Keychain', '₹129', '🍄')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Mushroom Keychain', 129, '🍄')">Order Now 🛒</button>
                 </div>
                 
                 <div class="product-card">
@@ -1991,7 +1979,7 @@
                     <h3 class="product-title">Star</h3>
                     <p class="product-desc">Twinkle twinkle little star!</p>
                     <p class="product-price">₹99</p>
-                    <button class="buy-btn" onclick="openOrderModal('Star Keychain', '₹99', '⭐')">Order Now 🛒</button>
+                    <button class="buy-btn" onclick="openOrderModal('Star Keychain', 99, '⭐')">Order Now 🛒</button>
                 </div>
             </div>
         </div>
@@ -2094,14 +2082,12 @@
         // ========== GLOBAL VARIABLES ==========
         let currentProduct = {
             name: '',
-            price: '',
+            unitPrice: 0,
             emoji: '',
             quantity: 1,
-            size: 'Small (4-6 inch)',
             color: 'Pink',
             isCustom: false,
-            customDesc: '',
-            customSize: ''
+            customDesc: ''
         };
 
         const WHATSAPP_NUMBER = '918755552525'; // Change this to actual number
@@ -2166,32 +2152,28 @@
         // ========== ORDER MODAL FUNCTIONS ==========
         function openOrderModal(productName, price, emoji) {
             currentProduct.name = productName;
-            currentProduct.price = price;
+            currentProduct.unitPrice = price;
             currentProduct.emoji = emoji;
             currentProduct.quantity = 1;
             currentProduct.isCustom = false;
+            currentProduct.color = 'Pink';
             
             document.getElementById('modalProductName').textContent = productName;
-            document.getElementById('modalProductPrice').textContent = price;
+            document.getElementById('modalProductPrice').textContent = '₹' + price;
             document.getElementById('modalProductEmoji').textContent = emoji;
             document.getElementById('qtyValue').textContent = '1';
             document.getElementById('customOrderCheck').checked = false;
             document.getElementById('customOrderFields').classList.remove('active');
             document.getElementById('customDescription').value = '';
-            document.getElementById('customSize').value = '';
             document.getElementById('buyerName').value = '';
-            
-            // Reset size selection
-            document.querySelectorAll('.size-option').forEach((opt, i) => {
-                opt.classList.toggle('selected', i === 0);
-            });
-            currentProduct.size = 'Small (4-6 inch)';
             
             // Reset color selection
             document.querySelectorAll('.color-option').forEach((opt, i) => {
                 opt.classList.toggle('selected', i === 0);
             });
-            currentProduct.color = 'Pink';
+            
+            // Update price display
+            updatePriceDisplay();
             
             document.getElementById('orderModal').classList.add('active');
         }
@@ -2202,10 +2184,11 @@
 
         function openCustomOrderModal() {
             currentProduct.name = 'Custom Order';
-            currentProduct.price = 'To be decided';
+            currentProduct.unitPrice = 0;
             currentProduct.emoji = '✨';
             currentProduct.quantity = 1;
             currentProduct.isCustom = true;
+            currentProduct.color = 'Pink';
             
             document.getElementById('modalProductName').textContent = 'Custom Order';
             document.getElementById('modalProductPrice').textContent = 'Price on Request';
@@ -2214,27 +2197,42 @@
             document.getElementById('customOrderCheck').checked = true;
             document.getElementById('customOrderFields').classList.add('active');
             document.getElementById('customDescription').value = '';
-            document.getElementById('customSize').value = '';
             document.getElementById('buyerName').value = '';
             
+            // Update price display for custom
+            document.getElementById('displayUnitPrice').textContent = 'TBD';
+            document.getElementById('displayQty').textContent = '1';
+            document.getElementById('displayTotalPrice').textContent = 'To Be Decided';
+            
             document.getElementById('orderModal').classList.add('active');
+        }
+
+        // ========== LIVE PRICE UPDATE ==========
+        function updatePriceDisplay() {
+            const unitPrice = currentProduct.unitPrice;
+            const quantity = currentProduct.quantity;
+            const totalPrice = unitPrice * quantity;
+            
+            document.getElementById('displayUnitPrice').textContent = '₹' + unitPrice;
+            document.getElementById('displayQty').textContent = quantity;
+            document.getElementById('displayTotalPrice').textContent = '₹' + totalPrice;
         }
 
         // ========== QUANTITY FUNCTIONS ==========
         function changeQty(change) {
             let qty = parseInt(document.getElementById('qtyValue').textContent);
-            qty = Math.max(1, qty + change);
+            qty = Math.max(1, qty + change); // Minimum 1
+            qty = Math.min(99, qty); // Maximum 99
+            
             document.getElementById('qtyValue').textContent = qty;
             currentProduct.quantity = qty;
-        }
-
-        // ========== SIZE SELECTION ==========
-        function selectSize(element) {
-            document.querySelectorAll('.size-option').forEach(opt => {
-                opt.classList.remove('selected');
-            });
-            element.classList.add('selected');
-            currentProduct.size = element.querySelector('input').value;
+            
+            // Update live price
+            if (!currentProduct.isCustom || currentProduct.unitPrice > 0) {
+                updatePriceDisplay();
+            } else {
+                document.getElementById('displayQty').textContent = qty;
+            }
         }
 
         // ========== COLOR SELECTION ==========
@@ -2262,35 +2260,37 @@
                 return;
             }
             
+            const totalPrice = currentProduct.unitPrice * currentProduct.quantity;
+            
             let message = `🧶 *THE YARN TALES - Order Request* 🧶\n\n`;
             message += `👤 *Customer Name:* ${buyerName}\n\n`;
             message += `━━━━━━━━━━━━━━━━━━━━━\n`;
-            message += `📦 *Product Details:*\n`;
+            message += `📦 *Order Details:*\n`;
             message += `━━━━━━━━━━━━━━━━━━━━━\n\n`;
-            message += `🏷️ *Product:* ${currentProduct.name}\n`;
-            message += `💰 *Price:* ${currentProduct.price}\n`;
+            message += `${currentProduct.emoji} *Product:* ${currentProduct.name}\n`;
+            
+            if (currentProduct.unitPrice > 0) {
+                message += `💵 *Unit Price:* ₹${currentProduct.unitPrice}\n`;
+            }
+            
             message += `🔢 *Quantity:* ${currentProduct.quantity}\n`;
-            message += `📏 *Size:* ${currentProduct.size}\n`;
             message += `🎨 *Color:* ${currentProduct.color}\n\n`;
+            
+            if (currentProduct.unitPrice > 0) {
+                message += `━━━━━━━━━━━━━━━━━━━━━\n`;
+                message += `💰 *TOTAL AMOUNT: ₹${totalPrice}*\n`;
+                message += `━━━━━━━━━━━━━━━━━━━━━\n\n`;
+            }
             
             if (currentProduct.isCustom) {
                 const customDesc = document.getElementById('customDescription').value.trim();
-                const customSize = document.getElementById('customSize').value.trim();
-                
-                message += `━━━━━━━━━━━━━━━━━━━━━\n`;
-                message += `✨ *Custom Order Details:*\n`;
-                message += `━━━━━━━━━━━━━━━━━━━━━\n\n`;
                 
                 if (customDesc) {
-                    message += `📝 *Description:* ${customDesc}\n`;
+                    message += `✨ *Custom Request:*\n`;
+                    message += `${customDesc}\n\n`;
                 }
-                if (customSize) {
-                    message += `📐 *Custom Size:* ${customSize}\n`;
-                }
-                message += `\n`;
             }
             
-            message += `━━━━━━━━━━━━━━━━━━━━━\n\n`;
             message += `🙏 *Please confirm this order!*\n\n`;
             message += `Thank you for choosing The Yarn Tales! 💕`;
             
